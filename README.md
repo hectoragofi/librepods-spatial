@@ -27,6 +27,23 @@
 </a>
 </div>
 
+# LibrePods Spatial (fork)
+
+A personal fork of [LibrePods](https://github.com/librepods-org/librepods) that adds two no-root features to the Android v2 rewrite, built for a Pixel 8 with AirPods:
+
+| Feature | Branch | Status |
+| ------- | ------ | ------ |
+| **Heart Rate+**: workouts with zones and history, CSV/FIT export, Health Connect sessions, BLE Heart Rate Service sharing, auto-recovery when samples stop | [`hr-plus`](https://github.com/hectoragofi/librepods-spatial/tree/hr-plus) | Unit-tested; recovery, migrated history, Health Connect and BLE sharing still need live checks |
+| **Spatial Audio (OWN 3D)**: own binaural renderer (HRTF + room) for selected media apps, presets, draggable virtual speakers on a head map | [`spatial-own3d`](https://github.com/hectoragofi/librepods-spatial/tree/spatial-own3d) | Experimental, not yet tested on device |
+
+`spatial-own3d` is stacked on `hr-plus`, which is stacked on upstream's `android/rewrite`, so it contains both features.
+
+**No root needed.** Spatial Audio runs as a [Shizuku](https://shizuku.rikka.app/) user service that captures the apps you pick through an audio-policy loopback and renders them itself. It only captures while a selected app is playing over Bluetooth, and releases after 8 s of silence. This is not head tracking: the AirPods' motion data isn't used.
+
+The Heart Rate+ build installs as `me.kavishdevar.librepods.hearttest` ("LibrePods Heart Rate"), so it can sit next to or replace the old v1 heart-rate build.
+
+Everything below is upstream's README, unchanged. `main` here tracks upstream's v1 code; the features above live on the branches in the table.
+
 # What is LibrePods?
 
 LibrePods allows you to use AirPods features that are exclusive to Apple devices. It implements the proprietary protocol used to exchange data between AirPods and Apple devices, enabling features like changing noise control modes, fast ear detection, accurate battery status, head gestures, conversational awareness, and more on non-Apple platforms.
